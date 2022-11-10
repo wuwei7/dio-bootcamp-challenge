@@ -8,6 +8,8 @@ public class Mentorship {
 	private String description;
 	private LocalDate date;
 	
+	public Mentorship() {}
+	
 	public String getTitle() {
 		return title;
 	}

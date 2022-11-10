@@ -6,6 +6,8 @@ public class Course {
 	private String description;
 	private int courseload;
 	
+	public Course() {}
+	
 	public String getTitle() {
 		return title;
 	}
