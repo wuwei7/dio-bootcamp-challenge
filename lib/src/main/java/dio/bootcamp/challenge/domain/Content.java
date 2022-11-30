@@ -4,6 +4,8 @@ public abstract class Content {
 	
 	private String title;
 	private String description;
+	// Static variables are associated with the class rather than the object of a class
+	// so all objects of the class share the same static variable.
 	protected static final double DEFAULT_XP = 10;
 	
 	public Content() {}
