@@ -2,6 +2,7 @@ package dio.bootcamp.challenge.domain;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class Dev {
@@ -10,11 +11,27 @@ public class Dev {
 	private Set<Content> enrolledContents = new LinkedHashSet<>();
 	private Set<Content> finishedContents = new LinkedHashSet<>();
 	
-	public void enrolBootcamp(Bootcamp bootcamp) {}
+	public void enrollBootcamp(Bootcamp bootcamp) {
+		this.enrolledContents.addAll(bootcamp.getContents());
+		bootcamp.getEnrolledDevs().add(this);
+	}
 	
-	public void progress() {}
+	public void progress() {
+		// Stream findFirst() returns an Optional (a container object which may or may not contain a non-null value).
+		// Returns the first element in a Stream.
+		Optional<Content> content = this.enrolledContents.stream().findFirst();
+		
+		if (content.isPresent()) {
+			this.finishedContents.add(content.get());
+			this.enrolledContents.remove(content.get());
+		} else {
+			System.err.println("You are not enrolled in any course.");
+		}
+	}
 	
-	public void calculateTotalXp() {}
+	public double calculateTotalXp() {
+		return this.finishedContents.stream().mapToDouble(content -> content.calculateXp()).sum();		
+	}
 
 	public String getName() {
 		return name;
